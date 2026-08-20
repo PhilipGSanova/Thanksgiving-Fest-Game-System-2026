@@ -10,6 +10,7 @@ export default function SignIn() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
+  const isJovi = name.trim().toLowerCase() === 'jovi';
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -28,22 +29,30 @@ export default function SignIn() {
   }
 
   return (
-    <div className="auth-wrap">
+    <div className={`auth-wrap ${isJovi ? 'jovi-signin-preview' : ''}`}>
+      {isJovi && (
+        <div className="jovi-heartfield" aria-hidden="true">
+          <span>♥</span>
+          <span>♥</span>
+          <span>♥</span>
+          <span>♥</span>
+        </div>
+      )}
 
       <div className="marquee-frame signin-card">
         <div className="ticket auth-card">
           {/* Icon */}
           <div className="signin-icon">
-            🎟️
+            {isJovi ? '💚' : '🎟️'}
           </div>
 
           {/* Heading */}
           <h1 className="page-title signin-title">
-            WELCOME BACK
+            {isJovi ? 'WELCOME DARLING' : 'WELCOME BACK'}
           </h1>
 
           <p className="page-subtitle signin-subtitle">
-            Sign in to your arcade pass
+            {isJovi ? 'A little arcade made just for you' : 'Sign in to your arcade pass'}
           </p>
 
           {/* Error */}

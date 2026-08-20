@@ -8,6 +8,12 @@ export function AuthProvider({ children }) {
   const [stalls, setStalls] = useState([]); // stalls assigned to current user
   const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    document.documentElement.dataset.theme = user?.name?.trim().toLowerCase() === 'jovi'
+      ? 'jovi'
+      : 'default';
+  }, [user]);
+
   const loadMe = useCallback(async () => {
     const token = localStorage.getItem('hfa_token');
     if (!token) {

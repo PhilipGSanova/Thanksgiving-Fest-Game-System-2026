@@ -26,10 +26,24 @@ import EditItem from './pages/EditItem';
 import PlayerSignIn from './pages/PlayerSignIn';
 import PlayerDashboard from './pages/PlayerDashboard';
 import EditPlayerProfile from './pages/EditPlayerProfile';
+import { useAuth } from './context/AuthContext';
 
 export default function App() {
+  const { user } = useAuth();
+  const isJovi = user?.name?.trim().toLowerCase() === 'jovi';
+
   return (
     <div>
+      {isJovi && (
+        <div className="jovi-heartfield" aria-hidden="true">
+          <span>♥</span>
+          <span>♥</span>
+          <span>♥</span>
+          <span>♥</span>
+          <span>♥</span>
+          <span>♥</span>
+        </div>
+      )}
       <Navbar />
 
       <Routes>

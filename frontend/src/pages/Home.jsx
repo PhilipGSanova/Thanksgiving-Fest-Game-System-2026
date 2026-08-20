@@ -7,6 +7,7 @@ const STALL_ICON = { Admin: '🛠️', Game: '🎮', 'Gift Counter': '🎁' };
 export default function Home() {
   const { user, stalls, refresh } = useAuth();
   const navigate = useNavigate();
+  const isJovi = user?.name?.trim().toLowerCase() === 'jovi';
 
   useEffect(() => {
     refresh();
@@ -19,6 +20,11 @@ export default function Home() {
   }
   return (
     <div className="page">
+      {isJovi && (
+        <h1 className="page-title mt-24" style={{ fontSize: 20 }}>
+          WELCOME DARLING
+        </h1>
+      )}
       <h2 className="page-title mt-24" style={{ fontSize: 15 }}>
         YOUR STALLS
       </h2>

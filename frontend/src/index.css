@@ -97,6 +97,165 @@ select {
   color: var(--bg-deep);
 }
 
+/* Jovi's personal green-and-valentine arcade theme. */
+html[data-theme='jovi'] {
+  --bg-deep: #321827;
+  --bg-panel: #54243d;
+  --bg-panel-raised: #713454;
+  --bg-field: #3c1b2e;
+  --amber: #ff9fc2;
+  --amber-soft: #ffd1df;
+  --pumpkin: #f05d91;
+  --cider: #ff709b;
+  --leaf: #80d49a;
+  --plum-line: #934568;
+  --text-cream: #fff4f8;
+  --text-muted: #f0bfd0;
+  --text-faint: #c993aa;
+  --shadow-panel: 0 12px 40px rgba(30, 7, 19, 0.52);
+  --glow-amber: 0 0 16px rgba(255, 159, 194, 0.58);
+  --glow-pumpkin: 0 0 16px rgba(240, 93, 145, 0.52);
+}
+
+html[data-theme='jovi'] body {
+  background:
+    radial-gradient(ellipse 70% 45% at 15% -8%, rgba(240, 93, 145, 0.24), transparent),
+    radial-gradient(ellipse 55% 35% at 90% 5%, rgba(128, 212, 154, 0.14), transparent),
+    var(--bg-deep);
+}
+
+html[data-theme='jovi'] .marquee-frame {
+  background: linear-gradient(135deg, var(--pumpkin), var(--amber), var(--cider), var(--leaf));
+}
+
+html[data-theme='jovi'] .navbar {
+  border-bottom-color: var(--plum-line);
+}
+
+html[data-theme='jovi'] .navbar::after {
+  content: '♥  JOVI\2019S ARCADE  ♥';
+  color: var(--cider);
+  font-family: var(--font-display);
+  font-size: 9px;
+  letter-spacing: 1px;
+  margin-left: 18px;
+}
+
+.jovi-heartfield {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.jovi-heartfield span {
+  position: absolute;
+  bottom: -48px;
+  left: var(--heart-left);
+  color: var(--heart-color);
+  font-size: var(--heart-size);
+  opacity: 0;
+  text-shadow: 0 0 14px currentColor;
+  animation: jovi-heart-rise var(--heart-duration) linear infinite;
+  animation-delay: var(--heart-delay);
+}
+
+.jovi-heartfield span:nth-child(1) {
+  --heart-left: 8%;
+  --heart-color: #ff9fc2;
+  --heart-size: 18px;
+  --heart-duration: 13s;
+  --heart-delay: -2s;
+}
+
+.jovi-heartfield span:nth-child(2) {
+  --heart-left: 25%;
+  --heart-color: #80d49a;
+  --heart-size: 12px;
+  --heart-duration: 16s;
+  --heart-delay: -9s;
+}
+
+.jovi-heartfield span:nth-child(3) {
+  --heart-left: 45%;
+  --heart-color: #ff709b;
+  --heart-size: 22px;
+  --heart-duration: 15s;
+  --heart-delay: -5s;
+}
+
+.jovi-heartfield span:nth-child(4) {
+  --heart-left: 64%;
+  --heart-color: #80d49a;
+  --heart-size: 15px;
+  --heart-duration: 18s;
+  --heart-delay: -12s;
+}
+
+.jovi-heartfield span:nth-child(5) {
+  --heart-left: 80%;
+  --heart-color: #ff9fc2;
+  --heart-size: 20px;
+  --heart-duration: 14s;
+  --heart-delay: -7s;
+}
+
+.jovi-heartfield span:nth-child(6) {
+  --heart-left: 93%;
+  --heart-color: #80d49a;
+  --heart-size: 11px;
+  --heart-duration: 17s;
+  --heart-delay: -15s;
+}
+
+@keyframes jovi-heart-rise {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) rotate(-12deg) scale(0.8);
+  }
+
+  12% {
+    opacity: 0.62;
+  }
+
+  88% {
+    opacity: 0.28;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(28px, -110vh, 0) rotate(18deg) scale(1.15);
+  }
+}
+
+.jovi-signin-preview .signin-card {
+  filter: drop-shadow(0 0 18px rgba(87, 183, 122, 0.22));
+}
+
+.jovi-signin-preview {
+  --bg-panel: #54243d;
+  --bg-field: #3c1b2e;
+  --amber: #ff9fc2;
+  --amber-soft: #ffd1df;
+  --pumpkin: #f05d91;
+  --cider: #ff709b;
+  --plum-line: #934568;
+  --text-cream: #fff4f8;
+  --text-muted: #f0bfd0;
+  --text-faint: #c993aa;
+  background: radial-gradient(circle at center, rgba(240, 93, 145, 0.12), transparent 60%);
+}
+
+.jovi-signin-preview .marquee-frame {
+  background: linear-gradient(135deg, #f05d91, #ff9fc2, #80d49a, #ff709b);
+}
+
+.jovi-signin-preview .signin-title {
+  color: var(--cider);
+  text-shadow: 0 0 14px rgba(233, 139, 158, 0.55);
+}
+
 /* Scrollbar */
 html {
   scrollbar-width: none;
