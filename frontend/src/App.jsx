@@ -30,20 +30,21 @@ import { useAuth } from './context/AuthContext';
 
 export default function App() {
   const { user } = useAuth();
-  const isJovi = user?.name?.trim().toLowerCase() === 'jovi';
 
   return (
     <div>
-      {isJovi && (
-        <div className="jovi-heartfield" aria-hidden="true">
-          <span>♥</span>
-          <span>♥</span>
-          <span>♥</span>
-          <span>♥</span>
-          <span>♥</span>
-          <span>♥</span>
-        </div>
-      )}
+      <div className="ambient-field" aria-hidden="true">
+        <span className="ambient-particle ambient-particle--1" />
+        <span className="ambient-particle ambient-particle--2" />
+        <span className="ambient-particle ambient-particle--3" />
+        <span className="ambient-particle ambient-particle--4" />
+        <span className="ambient-particle ambient-particle--5" />
+        <span className="ambient-particle ambient-particle--6" />
+        <span className="ambient-particle ambient-particle--7" />
+        <span className="ambient-particle ambient-particle--8" />
+        <span className="ambient-particle ambient-particle--9" />
+        <span className="ambient-particle ambient-particle--10" />
+      </div>
       <Navbar />
 
       <Routes>

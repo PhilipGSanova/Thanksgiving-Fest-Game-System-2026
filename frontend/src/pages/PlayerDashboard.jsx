@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { api } from '../api/api';
-import { Pie } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2';
 import 'chart.js/auto';
 
 export default function PlayerDashboard() {
@@ -49,12 +49,24 @@ export default function PlayerDashboard() {
   const recentTransactions = (data.transactions || []).slice(0, 5);
   const currentRank = ranking.findIndex((r) => r.playerId === data.player.playerId) + 1;
 
+  const palette = [
+    '#00f5d4', '#ffb703', '#ff4d6d', '#4cc9f0', '#9ef01a', '#c77dff',
+    '#ff8c42', '#2ec4b6', '#ff006e', '#8338ec', '#00bbf9', '#ff9f1c',
+    '#06d6a0', '#ffd166', '#ff2e63', '#3a86ff', '#ff9f1c', '#38b000',
+    '#e09f3e', '#ff6b6b', '#80ffdb', '#48cae4', '#ff99c8', '#a78bfa',
+    '#ff5d8f', '#00f5a0', '#f9c74f', '#ff85a1', '#00c2ff', '#b9ff66'
+  ];
+
   const chartData = {
     labels: breakdown.map((b) => b._id || 'Unknown'),
     datasets: [
       {
         data: breakdown.map((b) => Math.max(0, b.points)),
-        backgroundColor: ['#4dc9f6', '#f67019', '#f53794', '#537bc4', '#acc236', '#166a8f'],
+        backgroundColor: breakdown.map((_, index) => palette[index % palette.length]),
+        borderColor: '#ffffff',
+        borderWidth: 2,
+        hoverOffset: 8,
+        spacing: 2,
       },
     ],
   };
@@ -89,7 +101,55 @@ export default function PlayerDashboard() {
         {breakdown.length > 0 && (
           <div className="stall-card dashboard-card">
             <div className="dashboard-card-header">Points by Stall</div>
-            <Pie data={chartData} />
+            <div style={{ position: 'relative', maxWidth: 500, margin: '0 auto', minHeight: 500 }}>
+              <Doughnut
+                data={chartData}
+                options={{
+                  cutout: '60%',
+                  responsive: true,
+                  maintainAspectRatio: false,
+                  plugins: {
+                    legend: {
+                      position: 'bottom',
+                      labels: {
+                        color: '#f5e7ff',
+                        boxWidth: 50,
+                        padding: 16,
+                        usePointStyle: true,
+                        pointStyle: 'circle',
+                        font: {
+                          size: 12,
+                          family: 'Space Grotesk, sans-serif',
+                        },
+                      },
+                    },
+                    tooltip: {
+                      callbacks: {
+                        label(context) {
+                          return `${context.label}: ${context.parsed} pts`;
+                        },
+                      },
+                    },
+                  },
+                }}
+                style={{ width: '100%', height: '100%' }}
+              />
+              <div
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#fff8d8',
+                  fontWeight: 800,
+                  fontSize: 100,
+                  pointerEvents: 'none',
+                  textShadow: '0 0 12px rgba(255, 214, 102, 0.7)',
+                }}
+              >
+              </div>
+            </div>
           </div>
         )}
 
