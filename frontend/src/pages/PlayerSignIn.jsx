@@ -75,7 +75,7 @@ export default function PlayerSignIn() {
               <input
                 id="player-signin-id"
                 type="text"
-                placeholder="e.g. P-1001"
+                placeholder="e.g. 12001"
                 value={playerId}
                 onChange={(e) => setPlayerId(e.target.value)}
                 required

@@ -118,7 +118,7 @@ export default function CreatePlayer() {
                                 playerId: e.target.value,
                             }))
                         }
-                        placeholder="e.g. P-1001"
+                        placeholder="e.g. 12001"
                         required
                     />
                 </div>
