@@ -41,19 +41,7 @@ export default function SignIn() {
 
       <div className="marquee-frame signin-card">
         <div className="ticket auth-card">
-          {/* Icon */}
-          <div className="signin-icon">
-            {isJovi ? '💚' : '🎟️'}
-          </div>
-
-          {/* Heading */}
-          <h1 className="page-title signin-title">
-            {isJovi ? 'WELCOME DARLING' : 'WELCOME BACK'}
-          </h1>
-
-          <p className="page-subtitle signin-subtitle">
-            {isJovi ? 'A little arcade made just for you' : 'Sign in to your arcade pass'}
-          </p>
+          
 
           {/* Error */}
           {error && (
