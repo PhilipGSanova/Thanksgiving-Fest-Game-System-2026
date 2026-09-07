@@ -434,6 +434,26 @@ html {
   border-radius: var(--radius-sm);
 }
 
+/* Stall instructions button on the Games page */
+.stall-instructions-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.stall-instructions-btn:hover {
+  color: var(--text-cream);
+  border-color: var(--leaf);
+}
+
+.stall-instructions-icon {
+  display: inline-flex;
+  align-items: center;
+  font-size: 16px;
+  line-height: 1;
+}
+
 /* ==========================================================================
    Form fields
    ========================================================================== */

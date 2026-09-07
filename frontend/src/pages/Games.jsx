@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { api } from '../api/api';
+import { getStallInstructionUrl, slugifyStallName } from '../assets/instructions';
 
 export default function Games() {
   const { stalls } = useAuth();
@@ -67,6 +68,24 @@ export default function Games() {
     }
   }
 
+  function handleStallInstructions() {
+    if (!activeStall) return;
+
+    const url = getStallInstructionUrl(activeStall);
+
+    if (!url) {
+      setError(
+        `No instruction PDF found for "${activeStall.name}". Expected: assets/instructions/${slugifyStallName(
+          activeStall.name
+        )}.pdf`
+      );
+      return;
+    }
+
+    // Open the stall's instruction PDF in a new tab
+    window.open(url, '_blank', 'noopener,noreferrer');
+  }
+
   if (gameStalls.length === 0) {
     return (
       <div className="page">
@@ -121,6 +140,17 @@ export default function Games() {
           {error}
         </div>
       )}
+
+      <button
+        className="btn btn-ghost mt-16 stall-instructions-btn"
+        type="button"
+        onClick={handleStallInstructions}
+      >
+        <span className="stall-instructions-icon" aria-hidden="true">
+          ℹ️
+        </span>
+        Stall Instructions
+      </button>
 
       <form
         className="ticket mt-16"

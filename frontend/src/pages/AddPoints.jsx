@@ -29,8 +29,8 @@ export default function AddPoints() {
 
         const amount = Number(points);
 
-        if (!amount || amount <= 0) {
-            setError('Enter a positive number of points.');
+        if (!Number.isInteger(amount) || amount <= 0 || amount > 3) {
+            setError('Enter a whole number of points between 1 and 3.');
             return;
         }
 
@@ -157,7 +157,9 @@ export default function AddPoints() {
                         <input
                             type="number"
                             min="1"
-                            placeholder="e.g. 10"
+                            max="3"
+                            step="1"
+                            placeholder="e.g. 3"
                             value={points}
                             onChange={(e) =>
                                 setPoints(e.target.value)
