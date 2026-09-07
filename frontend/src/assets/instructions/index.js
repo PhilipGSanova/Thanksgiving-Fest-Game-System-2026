@@ -15,6 +15,12 @@ const files = import.meta.glob('./*.pdf', {
   import: 'default',
 });
 
+const normalizedFileNames = Object.keys(files).reduce((lookup, filePath) => {
+  const fileName = filePath.split('/').pop().replace(/\.pdf$/i, '');
+  lookup[fileName.replace(/[^a-z0-9]/gi, '').toLowerCase()] = filePath;
+  return lookup;
+}, {});
+
 // Convert a stall name like "Ring Toss!" into a filename-safe slug:
 //   "Ring Toss!" -> "ring-toss"
 export function slugifyStallName(name) {
@@ -29,5 +35,11 @@ export function slugifyStallName(name) {
 export function getStallInstructionUrl(stall) {
   if (!stall) return null;
   const slug = slugifyStallName(stall.name);
-  return files[`./${slug}.pdf`] || null;
+  const exactMatch = files[`./${slug}.pdf`];
+  if (exactMatch) return exactMatch;
+
+  const normalizedMatch = normalizedFileNames[
+    slug.replace(/[^a-z0-9]/gi, '').toLowerCase()
+  ];
+  return normalizedMatch ? files[normalizedMatch] : null;
 }
