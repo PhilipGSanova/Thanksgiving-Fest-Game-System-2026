@@ -28,6 +28,7 @@ export default function Games() {
   const activeStall =
     gameStalls.find((s) => s._id === activeStallId) ||
     gameStalls[0];
+  const instructionUrl = getStallInstructionUrl(activeStall);
 
   const [playerId, setPlayerId] = useState('');
   const [error, setError] = useState('');
@@ -68,12 +69,11 @@ export default function Games() {
     }
   }
 
-  function handleStallInstructions() {
+  function handleStallInstructions(e) {
     if (!activeStall) return;
 
-    const url = getStallInstructionUrl(activeStall);
-
-    if (!url) {
+    if (!instructionUrl) {
+      e.preventDefault();
       setError(
         `No instruction PDF found for "${activeStall.name}". Expected: assets/instructions/${slugifyStallName(
           activeStall.name
@@ -81,9 +81,6 @@ export default function Games() {
       );
       return;
     }
-
-    // Navigate directly so browser popup blocking cannot hide the PDF.
-    window.location.assign(url);
   }
 
   if (gameStalls.length === 0) {
@@ -141,16 +138,18 @@ export default function Games() {
         </div>
       )}
 
-      <button
+      <a
         className="btn btn-ghost mt-16 stall-instructions-btn"
-        type="button"
+        href={instructionUrl || '#'}
+        target={instructionUrl ? '_blank' : undefined}
+        rel={instructionUrl ? 'noopener noreferrer' : undefined}
         onClick={handleStallInstructions}
       >
         <span className="stall-instructions-icon" aria-hidden="true">
           ℹ️
         </span>
         Stall Instructions
-      </button>
+      </a>
 
       <form
         className="ticket mt-16"
