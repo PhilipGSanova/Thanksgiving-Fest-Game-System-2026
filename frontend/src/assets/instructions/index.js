@@ -41,5 +41,13 @@ export function getStallInstructionUrl(stall) {
   const normalizedMatch = normalizedFileNames[
     slug.replace(/[^a-z0-9]/gi, '').toLowerCase()
   ];
-  return normalizedMatch ? files[normalizedMatch] : null;
+  if (normalizedMatch) return files[normalizedMatch];
+
+  const normalizedSlug = slug.replace(/[^a-z0-9]/gi, '').toLowerCase();
+  const partialMatch = Object.entries(normalizedFileNames).find(
+    ([fileName]) =>
+      normalizedSlug.includes(fileName) || fileName.includes(normalizedSlug)
+  );
+
+  return partialMatch ? files[partialMatch[1]] : null;
 }

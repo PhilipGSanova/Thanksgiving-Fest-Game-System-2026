@@ -82,8 +82,8 @@ export default function Games() {
       return;
     }
 
-    // Open the stall's instruction PDF in a new tab
-    window.open(url, '_blank', 'noopener,noreferrer');
+    // Navigate directly so browser popup blocking cannot hide the PDF.
+    window.location.assign(url);
   }
 
   if (gameStalls.length === 0) {
