@@ -10,7 +10,6 @@ export default function SignIn() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
-  const isJovi = name.trim().toLowerCase() === 'jovi';
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -29,16 +28,7 @@ export default function SignIn() {
   }
 
   return (
-    <div className={`auth-wrap ${isJovi ? 'jovi-signin-preview' : ''}`}>
-      {isJovi && (
-        <div className="jovi-heartfield" aria-hidden="true">
-          <span>♥</span>
-          <span>♥</span>
-          <span>♥</span>
-          <span>♥</span>
-        </div>
-      )}
-
+    <div className="auth-wrap">
       <div className="marquee-frame signin-card">
         <div className="ticket auth-card">
           
