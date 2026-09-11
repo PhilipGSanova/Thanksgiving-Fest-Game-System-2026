@@ -160,9 +160,9 @@ export default function GiftRedeem() {
             return;
         }
 
-        if (totalPoints > player.totalPoints) {
+        if (totalPoints > player.balance) {
             setError(
-                `${player.name} only has ${player.totalPoints} points.`
+                `${player.name} only has ${player.balance} points.`
             );
             return;
         }
@@ -266,7 +266,7 @@ export default function GiftRedeem() {
                     </div>
 
                     <div className="big-points mt-8">
-                        {player.totalPoints} pts
+                        {player.balance} pts
                     </div>
                 </div>
 
@@ -568,7 +568,7 @@ export default function GiftRedeem() {
                                             busy ||
                                             basket.length === 0 ||
                                             totalPoints >
-                                            player.totalPoints
+                                            player.balance
                                         }
                                     >
                                         {busy

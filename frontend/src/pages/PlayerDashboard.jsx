@@ -85,8 +85,8 @@ export default function PlayerDashboard() {
 
       <div className="grid grid-cols-auto mt-24 player-dashboard-grid">
         <div className="stall-card dashboard-card">
-          <div className="dashboard-card-header">Total Points</div>
-          <div className="hero-number">{data.player.totalPoints || 0}</div>
+          <div className="dashboard-card-header">Balance Points</div>
+          <div className="hero-number">{data.player.balance || 0}</div>
           <div className="help-text muted">Keep stacking points across games to rise higher.</div>
         </div>
 
@@ -168,7 +168,7 @@ export default function PlayerDashboard() {
             <div className="leaderboard-row leaderboard-header">
               <span>Rank</span>
               <span>Player</span>
-              <span>Points</span>
+              <span>Overall Points</span>
             </div>
 
             {/* Players */}

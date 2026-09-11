@@ -13,6 +13,7 @@ const PlayerSchema = new mongoose.Schema(
     name: { type: String, required: true, trim: true },
     password: { type: String, default: 'welcome' },
     totalPoints: { type: Number, default: 0 },
+    balance: { type: Number, default: function () { return this.totalPoints; } },
     gameScores: {
       type: Map,
       of: { type: Number, default: 0 },

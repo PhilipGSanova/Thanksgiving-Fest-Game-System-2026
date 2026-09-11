@@ -98,11 +98,11 @@ router.post('/redeem', requireAuth, async (req, res) => {
         // Check player's points
         // -----------------------------
 
-        if (player.totalPoints < totalPoints) {
+        if (player.balance < totalPoints) {
             return res.status(400).json({
                 message:
                     `${player.name} only has ` +
-                    `${player.totalPoints} points. ` +
+                    `${player.balance} points. ` +
                     `Basket requires ${totalPoints} points.`,
             });
         }
@@ -112,7 +112,7 @@ router.post('/redeem', requireAuth, async (req, res) => {
         // Deduct player points
         // -----------------------------
 
-        player.totalPoints -= totalPoints;
+        player.balance -= totalPoints;
 
         await player.save();
 

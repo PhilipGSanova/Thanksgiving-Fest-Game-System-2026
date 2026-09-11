@@ -64,7 +64,7 @@ export default function PlayerRanking() {
               color: '#fff'             // adjust text color for contrast
             }}
           />
-          <button className="btn btn-outline btn-sm" onClick={load}>
+          <button className="button" onClick={load}>
             Refresh
           </button>
         </div>

@@ -157,7 +157,7 @@ export default function AddPoints() {
                         <input
                             type="number"
                             min="1"
-                            max="3"
+                            max="10"
                             step="1"
                             placeholder="e.g. 3"
                             value={points}

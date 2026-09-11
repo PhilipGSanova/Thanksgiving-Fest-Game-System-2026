@@ -61,6 +61,7 @@ router.post('/', requireAuth, requireAdminAccess, async (req, res) => {
       avatarId: avatarId || 'avatar_1',
       password: hashed,
       totalPoints: 0,
+      balance: 0,
       gameScores
     });
 
@@ -118,8 +119,8 @@ router.post('/:playerId/deduct', requireAuth, async (req, res) => {
     const player = await Player.findOne({ playerId: req.params.playerId.trim() });
     if (!player) return res.status(404).json({ message: 'Player not found.' });
 
-    const deducted = Math.min(amount, player.totalPoints);
-    player.totalPoints = Math.max(0, player.totalPoints - amount);
+    const deducted = Math.min(amount, player.balance);
+    player.balance = Math.max(0, player.balance - amount);
     await player.save();
 
     // Attempt to associate with a Gift Counter stall if available
@@ -156,6 +157,7 @@ router.post('/:playerId/add-points', requireAuth, async (req, res) => {
     const current = player.gameScores.get(stallName) || 0;
     player.gameScores.set(stallName, current + amount);
     player.totalPoints = player.totalPoints + amount;
+    player.balance = player.balance + amount;
     await player.save();
 
     // Record transaction history
@@ -210,7 +212,7 @@ router.post('/signin', async (req, res) => {
       { $sort: { points: -1 } }
     ]);
 
-    res.json({ player: { playerId: player.playerId, name: player.name, avatarId: player.avatarId, totalPoints: player.totalPoints }, transactions, ranking, breakdown });
+    res.json({ player: { playerId: player.playerId, name: player.name, avatarId: player.avatarId, totalPoints: player.totalPoints, balance: player.balance }, transactions, ranking, breakdown });
   } catch (err) {
     res.status(500).json({ message: 'Signin failed.', error: err.message });
   }
@@ -242,7 +244,7 @@ router.get('/:playerId/dashboard', async (req, res) => {
       { $sort: { points: -1 } }
     ]);
 
-    res.json({ player: { playerId: player.playerId, name: player.name, avatarId: player.avatarId, totalPoints: player.totalPoints }, transactions: transactionsWithStallNames, ranking, breakdown });
+    res.json({ player: { playerId: player.playerId, name: player.name, avatarId: player.avatarId, totalPoints: player.totalPoints, balance: player.balance }, transactions: transactionsWithStallNames, ranking, breakdown });
   } catch (err) {
     res.status(500).json({ message: 'Failed to load dashboard.', error: err.message });
   }
@@ -301,7 +303,7 @@ router.post('/self-update', async (req, res) => {
 
     await player.save();
 
-    res.json({ player: { playerId: player.playerId, name: player.name, avatarId: player.avatarId, totalPoints: player.totalPoints } });
+    res.json({ player: { playerId: player.playerId, name: player.name, avatarId: player.avatarId, totalPoints: player.totalPoints, balance: player.balance } });
   } catch (err) {
     res.status(500).json({ message: 'Failed to update profile.', error: err.message });
   }

@@ -207,6 +207,15 @@ html {
   white-space: nowrap;
 }
 
+button {
+  background: transparent;
+  color: var(--amber-soft);
+  border: 2px solid var(--plum-line);
+  padding: 2px 16px; /* top/bottom = 6px, left/right = 16px */
+  border-radius: 25px; /* optional, keeps rounded corners */
+  font-size: 14px; /* optional, adjust as needed */
+}
+
 .btn:active {
   transform: translateY(1px) scale(0.985);
 }
@@ -231,7 +240,9 @@ html {
 .btn-outline {
   background: transparent;
   color: var(--amber-soft);
-  border: 2px solid var(--plum-line);
+  border: 2px solid var(--plum-line); /* thicker border */
+  padding: 5px 10px; /* increases distance between text and border */
+  font-size: 16px;
 }
 
 .btn-outline:hover:not(:disabled) {
@@ -263,6 +274,11 @@ html {
 
 .btn-sm {
   padding: 8px 16px;
+  font-size: 12px;
+}
+
+.ranking-refresh-btn {
+  padding: 1px 16px;
   font-size: 12px;
 }
 
@@ -1215,6 +1231,7 @@ html {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-top: 20px;
 }
 
 .rank-row {
