@@ -90,7 +90,7 @@ export default function PlayerRanking() {
                   <div className="name">{p.name}</div>
                   <div className="pid">{p.playerId}</div>
                 </div>
-                <div className="rank-points">{p.totalPoints} pts</div>
+                <div className="rank-points">{p.balance} pts</div>
               </div>
             ))}
           </div>

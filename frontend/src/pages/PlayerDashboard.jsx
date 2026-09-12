@@ -93,7 +93,7 @@ export default function PlayerDashboard() {
         <div className="stall-card dashboard-card">
           <div className="dashboard-card-header">Current Rank</div>
           <div className="hero-number">{currentRank > 0 ? `#${currentRank}` : '-'}</div>
-          <div className="help-text muted">Top 5 leaderboard access is one tap away.</div>
+          <div className="help-text muted">Your current position in the leaderboard.</div>
         </div>
       </div>
 
@@ -168,7 +168,7 @@ export default function PlayerDashboard() {
             <div className="leaderboard-row leaderboard-header">
               <span>Rank</span>
               <span>Player</span>
-              <span>Overall Points</span>
+              <span>Points</span>
             </div>
 
             {/* Players */}
@@ -186,7 +186,7 @@ export default function PlayerDashboard() {
                 </strong>
 
                 <strong className="leaderboard-score">
-                  {r.totalPoints}
+                  {r.balance}
                 </strong>
               </div>
             ))}

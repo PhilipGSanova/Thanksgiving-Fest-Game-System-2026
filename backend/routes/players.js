@@ -16,14 +16,14 @@ router.get('/', requireAuth, async (req, res) => {
 
 // GET /api/players/ranking (public leaderboard)
 router.get('/ranking', async (req, res) => {
-  const players = await Player.find().sort({ totalPoints: -1, name: 1 });
+  const players = await Player.find().sort({ balance: -1, name: 1 });
   const ranked = players.map((p, idx) => ({
     rank: idx + 1,
     id: p._id,
     playerId: p.playerId,
     name: p.name,
     avatarId: p.avatarId,
-    totalPoints: p.totalPoints
+    balance: p.balance
   }));
   res.json({ players: ranked });
 });
@@ -199,8 +199,8 @@ router.post('/signin', async (req, res) => {
       .lean();
 
     // ranking (all players sorted)
-    const players = await Player.find().sort({ totalPoints: -1, name: 1 }).lean();
-    const ranking = players.map((p, idx) => ({ rank: idx + 1, playerId: p.playerId, name: p.name, totalPoints: p.totalPoints }));
+    const players = await Player.find().sort({ balance: -1, name: 1 }).lean();
+    const ranking = players.map((p, idx) => ({ rank: idx + 1, playerId: p.playerId, name: p.name, balance: p.balance }));
 
     // points breakdown by game stalls (exclude Gift Counter)
     const breakdown = await TransactionHistory.aggregate([
@@ -232,8 +232,8 @@ router.get('/:playerId/dashboard', async (req, res) => {
       ...transaction,
       stallName: stallNames.get(transaction.stallId) || null,
     }));
-    const players = await Player.find().sort({ totalPoints: -1, name: 1 }).lean();
-    const ranking = players.map((p, idx) => ({ rank: idx + 1, playerId: p.playerId, name: p.name, totalPoints: p.totalPoints }));
+    const players = await Player.find().sort({ balance: -1, name: 1 }).lean();
+    const ranking = players.map((p, idx) => ({ rank: idx + 1, playerId: p.playerId, name: p.name, balance: p.balance }));
 
     const breakdown = await TransactionHistory.aggregate([
       { $match: { playerId: player.playerId } },
