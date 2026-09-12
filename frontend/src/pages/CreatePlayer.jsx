@@ -42,6 +42,8 @@ export default function CreatePlayer() {
                 );
             } else {
                 await api.createPlayer(form);
+                setForm(EMPTY_FORM);
+                return;
             }
 
             navigate('/admin', {
