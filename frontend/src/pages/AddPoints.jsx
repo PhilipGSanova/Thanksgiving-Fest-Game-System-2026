@@ -29,8 +29,8 @@ export default function AddPoints() {
 
         const amount = Number(points);
 
-        if (!Number.isInteger(amount) || amount <= 0 || amount > 3) {
-            setError('Enter a whole number of points between 1 and 3.');
+        if (!Number.isInteger(amount) || amount <= 0 || amount > 10) {
+            setError('Enter a whole number of points between 1 and 10.');
             return;
         }
 

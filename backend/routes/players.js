@@ -144,8 +144,8 @@ router.post('/:playerId/add-points', requireAuth, async (req, res) => {
   try {
     const { points, stallName } = req.body;
     const amount = Number(points);
-    if (!amount || amount <= 0) {
-      return res.status(400).json({ message: 'Enter a positive number of points to add.' });
+    if (!Number.isInteger(amount) || amount <= 0 || amount > 10) {
+      return res.status(400).json({ message: 'Enter a whole number of points between 1 and 10.' });
     }
     if (!stallName) {
       return res.status(400).json({ message: 'Game stall name is required.' });
